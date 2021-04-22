@@ -30,7 +30,7 @@ public class UserService {
         User user = userDao.findUserById(id);
         log.info("user details:::"+user.toString());
         Department department =
-                restTemplate.getForObject("http://localhost:9001/department/"+user.getDepartmentId(), Department.class);
+                restTemplate.getForObject("http://DEPARTMENT-SERVICE/department/"+user.getDepartmentId(), Department.class);
         vo.setUser(user);
         vo.setDepartment(department);
         return vo;
