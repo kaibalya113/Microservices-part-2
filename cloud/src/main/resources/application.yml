@@ -21,24 +21,24 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: USER-SERVICE
-          uri: lb://USER-SERVICE
-          predicates:
-            - Path=/user/**
-          filter:
-            - name: CircuitBreaker
-              args:
-                name: USER-SERVICE
-                fallbackuri: forward:/userfallback
-        - id: DEPARTMENT-SERVICE
-          uri: lb://DEPARTMENT-SERVICE
-          predicates:
-            - Path=/department/**
-          filter:
-            - name: CircuitBreaker
-              args:
-                name: DEPARTMENT-SERVICE
-                fallbackuri: forward:/departmentfallback
+      - id: USER-SERVICE
+        uri: lb://USER-SERVICE
+        predicates:
+          - Path=/user/**
+        filters:
+          - name: CircuitBreaker
+            args:
+              name: USER-SERVICE
+              fallbackuri: forward:/userfallback
+      - id: DEPARTMENT-SERVICE
+        uri: lb://DEPARTMENT-SERVICE
+        predicates:
+          - Path=/department/**
+        filters:
+          - name: CircuitBreaker
+            args:
+              name: DEPARTMENT-SERVICE
+              fallbackuri: forward:/departmentfallback
 
 #Circuit Breaker
 # It will identify which services are not working then it will run the fallback method available
